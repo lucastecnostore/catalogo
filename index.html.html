@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo mayorista · Lucas Tecno Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
+<style>
+:root{color-scheme:light;--bg:#f3f6fc;--card:#fff;--ink:#101828;--mut:#5b6678;--line:#dbe2ef;--acc:#1f5fff;--acc2:#0b3fc4;--on:#fff;--ok:#0a8a4a;--warn:#b45309;--sh:rgba(16,24,40,.08);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0b1020;--card:#141b30;--ink:#eef2fb;--mut:#9aa6c0;--line:#25304d;--acc:#3d7bff;--acc2:#7aa2ff;--on:#fff;--ok:#3ddc8a;--warn:#fbbf24;--sh:rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0b1020;--card:#141b30;--ink:#eef2fb;--mut:#9aa6c0;--line:#25304d;--acc:#3d7bff;--acc2:#7aa2ff;--on:#fff;--ok:#3ddc8a;--warn:#fbbf24;--sh:rgba(0,0,0,.4)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 Archivo,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding:28px 0 8px}
+.brand{font-weight:800;font-size:15px;color:var(--acc2)}
+h1{font-size:clamp(28px,7vw,40px);line-height:1.08;margin:6px 0 10px;font-weight:800}
+.lead{color:var(--mut);margin:0 0 16px;max-width:52ch}
+.rules{display:grid;gap:8px;margin:0 0 6px;padding:0;list-style:none}
+.rules li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px}
+.rules b{display:block;font-size:15px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+nav .wrap{display:flex;gap:8px;overflow-x:auto}
+nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:8px 14px;font:600 14px Archivo,system-ui,sans-serif;cursor:pointer}
+nav button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--on)}
+h2{font-size:20px;margin:22px 0 10px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 10px;box-shadow:0 1px 2px var(--sh)}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.nm{font-weight:600;font-size:16px}
+.ds{color:var(--mut);font-size:13px;margin-top:2px}
+.pr{font-weight:800;font-size:20px;white-space:nowrap;text-align:right}
+.pr small{display:block;font-weight:400;font-size:12px;color:var(--mut)}
+.tiers{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.tiers span{font-size:12px;border:1px solid var(--line);border-radius:8px;padding:3px 8px;color:var(--mut)}
+.tiers span.on{border-color:var(--acc);color:var(--acc2);font-weight:600}
+.sell{font-size:13px;color:var(--ok);margin-top:8px}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 20px Archivo,system-ui,sans-serif;cursor:pointer}
+.step output{min-width:36px;text-align:center;font-weight:800}
+.sub{font-size:14px;color:var(--mut)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));z-index:6}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0}
+.bar b{font-size:20px}
+.btn{border:0;border-radius:12px;background:var(--acc);color:var(--on);padding:13px 18px;font:800 16px Archivo,system-ui,sans-serif;cursor:pointer}
+.btn:disabled{opacity:.5}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;display:none;align-items:flex-end}
+.sheet.open{display:flex}
+.panel{background:var(--bg);width:100%;max-height:88%;overflow:auto;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));max-width:760px;margin:0 auto}
+.ln{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.tot{display:flex;justify-content:space-between;font-size:22px;font-weight:800;margin:14px 0 6px}
+.msg{font-size:14px;margin:6px 0 12px}
+.msg.warn{color:var(--warn)}.msg.ok{color:var(--ok)}
+.ghost{background:none;border:0;color:var(--mut);font:600 14px Archivo,system-ui,sans-serif;padding:10px 0;cursor:pointer}
+footer{color:var(--mut);font-size:13px;padding:26px 0}
+:focus-visible{outline:3px solid var(--acc2);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="brand">Lucas Tecno Store</div>
+<h1>Catálogo mayorista para revender</h1>
+<p class="lead">Elegí lo que querés llevar, armá tu presupuesto con los precios por cantidad y mandalo por WhatsApp. Te lo confirmamos con stock y envío.</p>
+<ul class="rules">
+<li><b>Pedido mínimo de $100.000</b>Podés sumar productos surtidos. Desde ese monto no hay mínimo por unidad.</li>
+<li><b>Envíos a todo el país</b>Por Andreani. El envío se paga una sola vez según el volumen del pedido.</li>
+<li><b>Perfumes desde 5 unidades</b>Pueden ser surtidos. Es un mínimo aparte del de accesorios y relojes.</li>
+<li><b>Seña del 50% para confirmar</b>Productos en stock: el saldo se paga antes del envío.</li>
+</ul>
+</header>
+</div>
+<nav><div class="wrap" id="tabs"></div></nav>
+<main class="wrap" id="list"></main>
+<div class="wrap"><footer>Precios mayoristas en pesos argentinos, sujetos a cambios. Stock y precio final se confirman por WhatsApp.</footer></div>
+
+<div class="bar"><div class="wrap">
+<div><div class="sub" id="cnt">Sin productos</div><b id="tot">$0</b></div>
+<button class="btn" id="open" disabled>Ver presupuesto</button>
+</div></div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Tu presupuesto"><div class="panel">
+<h2 style="margin-top:0">Tu presupuesto</h2>
+<div id="lines"></div>
+<div class="tot"><span>Total</span><span id="tot2">$0</span></div>
+<div class="msg" id="note"></div>
+<button class="btn" id="send" style="width:100%">Enviar por WhatsApp</button>
+<button class="ghost" id="clear">Vaciar</button>
+<button class="ghost" id="close">Seguir eligiendo</button>
+</div></div>
+
+<script>
+var WA="5493815600218",MIN=100000;
+var CATS=[["fundas","Fundas y protectores"],["carga","Cargadores y cables"],["audio","Auriculares"],["relojes","Smartwatches"],["perf","Perfumes"],["combos","Combos"]];
+var P=[
+{id:"sil",c:"fundas",n:"Funda Silicone Case iPhone",t:[[10,3500],[21,3200],[51,2900],[101,2600],[301,2400],[501,2200]]},
+{id:"mgc",c:"fundas",n:"Funda MagSafe transparente",t:[[1,2900]]},
+{id:"mgm",c:"fundas",n:"Funda MagSafe mate",t:[[1,2900],[100,2800]]},
+{id:"mgb",c:"fundas",n:"Funda MagSafe brillo",d:"Consultanos los modelos disponibles",t:[[1,2900]]},
+{id:"mgn",c:"fundas",n:"Funda MagSafe de colores",t:[[1,3050],[11,2800],[41,2450],[101,2250],[301,2200],[501,2150]]},
+{id:"sur",c:"fundas",n:"Fundas surtidas iPhone (modelos y diseños)",d:"Surtido en oferta, diseños y modelos variados",t:[[1,1300]]},
+{id:"s18",c:"fundas",n:"Funda Silicone Case iPhone línea 18",t:[[1,4600],[11,4400],[41,4100],[101,3900],[301,3750],[501,3600]]},
+{id:"apb",c:"fundas",n:"Funda silicona AirPods Pro 2 (lisas y transparentes, en bolsita)",t:[[1,3700]]},
+{id:"apc",c:"fundas",n:"Funda silicona AirPods Pro 2 (en cajita)",t:[[1,4900]]},
+{id:"ape",c:"fundas",n:"Funda eco cuero AirPods Pro 2",t:[[1,5100]]},
+{id:"guc",c:"fundas",n:"Funda Gucci",t:[[1,2200]]},
+{id:"leo",c:"fundas",n:"Funda Leon Stras",t:[[1,2200]]},
+{id:"but",c:"fundas",n:"Funda Butterfly",t:[[1,2900]]},
+{id:"tra",c:"fundas",n:"Funda antishock transparente (hasta iPhone 16 Pro Max)",t:[[1,1400]]},
+{id:"t17",c:"fundas",n:"Funda antishock transparente (línea iPhone 17)",t:[[1,1600]]},
+{id:"t9d",c:"fundas",n:"Vidrio templado 9D",t:[[10,1200],[20,1100],[50,1000],[100,900],[200,800]]},
+{id:"pri",c:"fundas",n:"Vidrio templado Privacy",t:[[1,2000]],r:4000},
+{id:"cam",c:"fundas",n:"Protector de cámara iPhone",t:[[10,1500]]},
+{id:"tar",c:"fundas",n:"Tarjetero MagSafe de cuero",t:[[1,7000]]},
+{id:"cor",c:"fundas",n:"Nice Cord, cordón para fundas",t:[[1,3700]],r:8500},
+{id:"c25",c:"carga",n:"Cabezal USB-C 25W carga rápida",t:[[10,5300],[30,5100],[50,4900],[100,4700]],r:9000},
+{id:"k20",c:"carga",n:"Kit cargador 20W + cable Lightning",d:"Desde 5 unidades",t:[[5,6500]],r:12000},
+{id:"sam",c:"carga",n:"Cargador Samsung 2 USB 2.4A",d:"Desde 5 unidades",t:[[5,2600]],r:5600},
+{id:"mic",c:"carga",n:"Cargador rápido 2.4A Micro USB",t:[[1,2900]]},
+{id:"lig",c:"carga",n:"Cable Lightning a USB, carga rápida",t:[[10,2300]]},
+{id:"cl",c:"carga",n:"Cable USB-C a Lightning, carga rápida",t:[[10,2500]]},
+{id:"cc",c:"carga",n:"Cable USB-C a USB-C",t:[[10,3000]]},
+{id:"bat",c:"carga",n:"Battery pack",t:[[1,16000]]},
+{id:"wif",c:"carga",n:"Adaptador Wireless USB 150 Mbps",t:[[1,7100]]},
+{id:"ear",c:"audio",n:"Earpods jack 3.5 mm",t:[[1,3500]],r:5900},
+{id:"blu",c:"audio",n:"Auriculares Bluetooth de colores",t:[[1,6900]],r:12000},
+{id:"m10",c:"audio",n:"Auriculares M10 Pro",d:"Precio de combo por 10 unidades",t:[[10,7000]]}
+];
+var K=[
+{id:"k1",n:"Combo Emprendedor Inicial",d:"10 siliconas, 10 templados y 4 cables",p:56000},
+{id:"k2",n:"Combo Emprendedor Base",d:"Fundas, templados, cables, cabezales y cubre cámaras",p:121000},
+{id:"k3",n:"Combo Emprendedor 100 siliconas",d:"100 Silicone Case iPhone, a $2.300 c/u",p:230000}
+];
+var Q={},cat="fundas";
+function mk(s,c,pre,min){return s.split(";").map(function(x,i){var a=x.split("|");return{id:pre+i,c:c,n:a[0],t:[[min,+a[1]]],r:+a[2]}})}
+P=P.concat(mk("T500|10500|14900;i8 Pro Max|13700|20000;Watch 8 Ultra|14900|18900;Smartwatch Black Neutro|14900|19900;Z66 Ultra|14900|21000;Mixor Momentos|14900|21000;Mixor Pulso|14900|21000;HiWatch Pro|14900|21900;SU 30|17500|24500;Bulltec Z10 Pro AMOLED|19000|33000;Smartwatch plateado malla clara|21000|31900;S7 Ultra|21000|34900;GT5 – Doble malla|23000|29500;Ultra 3 Smart Watch 7+1 (2025)|23500|31900;Watch X Max|23500|31900","relojes","w",1));
+P=P.concat(mk("Aceite Árabe Roll On|1500|1800;Afnan 9 pm|50500|60000;Afnan 9 Pm Night Out|106000|126000;Afnan 9am White|66000|78500;Al Wataniah Bareeq Al Dhahab EDP|36500|43500;Al Wataniah Durrat Al Aroos|29500|35000;Amber Oud Gold Edition Extreme Pure|103000|122500;Armaf Island Bliss EDP|84000|99500;Armaf Yum Yum EDP|81500|96500;Asad Elixir de Lattafa|62500|74000;Asad Zanzibar EDP|43500|52000;Atlas Lattafa|55500|66000;Bayaan Lattafa|42500|50500;Bharara Bleu|89000|102000;Bharara Double Bleu|97000|110500;Bharara Goddess|97000|110500;Bharara King|112000|128000;Bharara Niche Femme|97000|110500;Bharara Queen|97000|110500;Bharara Scarlet|118000|134000;Bharara Viking Kashmir|109500|125000;Body Splash Victoria’s Secret|12700|15100;Body Splash Árabe|6300|7400;Breeze - Lattafa|60500|71500;Club de Nuit Sillage de Armaf|58500|64000;Club de Nuit Untold|68000|75000;Club de Nuit Woman|52500|57500;Como Moiselle - Maison Alhambra|41500|49000;Delilah Blanc de Maison Alhambra|51500|61000;Desodorantes Árabes|4300|5100;Emaan de Lattafa|42000|50000;Emeer Lattafa|83000|98000;Erba Pura|389000|432000;Erba Pura G5 - Con pañuelo|33500|39000;Evolution de Zimaya|38000|45000;Fakhar Gold EDP|40500|48500;Fakhar Platin|42000|49500;Hawas Black de Rasasi|55000|65000;Hawas for Him Rasasi|63000|74500;Hawas Malibu|84000|99500;Hayaati Black|28500|33500;Hayaati Gold Elixir|30500|35500;Her Confession|53000|63000;Invictus Victory - Rabanne|150000|167000;Jean Lowe Maitre 100 ml|26500|31500;Jean Paul Gaultier Le Male Elixir Parfum|200000|222000;Jean Paul Gaultier Le Male Lover - Calidad G5|29500|34500;Jorge Di Profumo|25500|30000;Jorge Di Profumo Deep Blue|30500|36500;Khamrah Dukhan de Lattafa|43000|51000;Khamrah WAHA|114000|127000;Lattafa Al Noble Green|47000|56000;Lattafa Amethyst|39000|46500;Lattafa Asad Bourbon|61000|72000;Lattafa Asad Original|56000|66500;Lattafa Confidential Platinum EDP|31500|37000;Lattafa Eclaire|52500|62500;Lattafa Eclaire Banoffi|69500|82500;Lattafa Eclaire Pistache|69500|82500;Lattafa Fakhar Rose|62000|73500;Lattafa Fakhar Silver|57000|68000;Lattafa Gharam|51500|61500;Lattafa Haya|48500|57500;Lattafa Honor and Glory|46500|55500;Lattafa Ishq Al Shuyukh Gold EDP|46500|55500;Lattafa Khamrah EDP|43000|51000;Lattafa Khamrah Qahwa|43000|51000;Lattafa Mayar|45000|53000;Lattafa Mayar Natural Intense|42500|50500;Lattafa Musamam White Intense|82000|97000;Lattafa Musk Salama|33000|39000;Lattafa Noble Blush|45000|53500;Lattafa Oud for Glory|45000|53500;Lattafa Qaed Al Fursan|30500|36500;Lattafa Qaed Al Fursan Unlimited|27000|32000;Lattafa Qaed Al Fursan Untamed|26000|31000;Lattafa Raghba + Desodorante|33000|39000;Magma Love de Zimaya|38000|45000;Sabah Al Ward Sugar|29500|35000;Sabah Al Ward Valentine|60000|71500;Sakeena|42500|50500;Salvo Intense de Maison Alhambra|38000|45000;Sceptre Bronzite de Maison Alhambra|35500|42000;Sceptre Malachite - Maison Alhambra|48500|57500;Sharaf Blend - Zimaya|55500|66000;Tiramisu Coco de Zimaya|53000|63000;Toleen Niche Emarati|74500|88500;Toy Boy - Moschino|109500|130000;Veneno Scarlet|88500|105000;Vulcan Baie|65000|77000;Vulcan Black|81000|96000;Wild Hunt|21100|25100;World Cup VIP|129000|143000;Yara Collection Oud|58000|68500;Yara Elixir|53000|63000;Zikrayat|27500|33000","perf","pf",5));
+K.push({id:"k10",n:"Combo Emprendedor Plus",d:"20 siliconas, 20 templados y 10 cables. Reventa estimada $310.000",p:117000},{id:"k9",n:"Combo 38 artículos",d:"38 artículos para empezar a revender",p:100000},{id:"k8",n:"Combo Emprendedor Pro",d:"30 siliconas, 30 templados y 20 cables. Reventa estimada $500.000",p:172000},{id:"k4",n:"Combo relojes Arranque",d:"8 relojes: 2 Z66 Ultra, 2 Watch 8 Ultra, 1 i8 Pro Max y 3 T500. Reventa estimada $144.500",p:104800},{id:"k5",n:"Combo relojes Emprendedor",d:"10 relojes: 2 de GT5, S7 Ultra, Ultra 3 7+1, Z66 Ultra y SU 30. Reventa estimada $283.600",p:199800},{id:"k6",n:"Combo relojes Crecimiento",d:"15 relojes: 3 de GT5, Ultra 3 7+1, S7 Ultra, SU 30 y Z66 Ultra. Reventa estimada $425.400",p:299700},{id:"k7",n:"Combo relojes Expansión",d:"24 relojes: 4 de GT5, Ultra 3 7+1, Watch X Max, S7 Ultra, SU 30 y Z66 Ultra. Reventa estimada $694.800",p:493600});
+function $(i){return document.getElementById(i)}
+function fm(n){return "$"+Math.round(n).toLocaleString("es-AR")}
+function unit(p,q){var u=p.t[0][1];for(var i=0;i<p.t.length;i++){if(q>=p.t[i][0])u=p.t[i][1]}return u}
+function tiers(p,q){return p.t.map(function(x,i){var nx=p.t[i+1],on=q>0&&q>=x[0]&&(!nx||q<nx[0])||(q>0&&q<p.t[0][0]&&i==0);
+ var lab=p.t.length==1?(x[0]>1?"Desde "+x[0]+" u.":"Por unidad"):(x[0]+"+ u.");
+ return '<span class="'+(on?"on":"")+'">'+lab+" · "+fm(x[1])+"</span>"}).join("")}
+function card(p,isK){
+ var q=Q[p.id]||0,main=isK?fm(p.p):fm(q?unit(p,q):p.t[0][1]);
+ var h='<article class="item" id="a-'+p.id+'"><div class="top"><div><div class="nm">'+p.n+'</div>'+(p.d?'<div class="ds">'+p.d+'</div>':"")+'</div><div class="pr" id="pr-'+p.id+'">'+main+"<small>"+(isK?"el combo":"c/u")+"</small></div></div>";
+ if(!isK){h+='<div class="tiers" id="ti-'+p.id+'">'+tiers(p,q)+"</div>";
+  if(p.r){var g=Math.round((p.r/p.t[0][1]-1)*100);h+='<div class="sell">Vendelo a '+fm(p.r)+" · ganás "+fm(p.r-p.t[0][1])+" por unidad</div>"}}
+ h+='<div class="row"><span class="sub" id="su-'+p.id+'"></span><div class="step"><button data-i="'+p.id+'" data-d="-1" aria-label="Quitar uno">−</button><output id="q-'+p.id+'">'+q+'</output><button data-i="'+p.id+'" data-d="1" aria-label="Sumar uno">+</button></div></div></article>';
+ return h}
+function all(){return P.concat(K)}
+function render(){
+ $("tabs").innerHTML=CATS.map(function(c){return '<button data-c="'+c[0]+'" aria-pressed="'+(c[0]==cat)+'">'+c[1]+"</button>"}).join("");
+ var items=cat=="combos"?K:P.filter(function(p){return p.c==cat});
+ $("list").innerHTML='<h2>'+CATS.filter(function(c){return c[0]==cat})[0][1]+"</h2>"+(cat=="perf"?'<input id="sq" type="search" placeholder="Buscar perfume" aria-label="Buscar perfume" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:16px Archivo,system-ui,sans-serif;margin-bottom:10px">':"")+items.map(function(p){return card(p,cat=="combos")}).join("");
+ upd()}
+function calc(){var L=[],tot=0,loose=0,n=0,pu=0,pt=0;
+ all().forEach(function(p){var q=Q[p.id]||0;if(!q)return;var isK=p.p!=null,u=isK?p.p:unit(p,q);tot+=u*q;if(p.c=="perf"){pu+=q;pt+=u*q}else if(!isK)loose+=u*q;n+=q;L.push({p:p,q:q,u:u})});
+ return{L:L,tot:tot,loose:loose,n:n,pu:pu,pt:pt}}
+function upd(){var c=calc();
+ all().forEach(function(p){var q=Q[p.id]||0,e=$("q-"+p.id);if(!e)return;e.textContent=q;var isK=p.p!=null;
+  if(!isK){$("pr-"+p.id).innerHTML=fm(q?unit(p,q):p.t[0][1])+"<small>c/u</small>";$("ti-"+p.id).innerHTML=tiers(p,q)}
+  $("su-"+p.id).textContent=q?"Subtotal "+fm((isK?p.p:unit(p,q))*q):""});
+ $("cnt").textContent=c.n?c.n+(c.n==1?" unidad":" unidades"):"Sin productos";$("tot").textContent=fm(c.tot);$("open").disabled=!c.n}
+function sheet(){var c=calc();
+ $("lines").innerHTML=c.L.map(function(x){return '<div class="ln"><span>'+x.q+" × "+x.p.n+'<br><span class="sub">'+fm(x.u)+" c/u</span></span><b>"+fm(x.u*x.q)+"</b></div>"}).join("");
+ $("tot2").textContent=fm(c.tot);var m=$("note");
+ var bs=c.tot-c.pt;if(c.loose>0&&bs<MIN){m.className="msg warn";m.textContent="Te faltan "+fm(MIN-bs)+" para llegar al pedido mínimo de "+fm(MIN)+" en accesorios y relojes."}
+ else if(c.pu>0&&c.pu<5){m.className="msg warn";m.textContent="Los perfumes se llevan desde 5 unidades, pueden ser surtidos. Te faltan "+(5-c.pu)+"."}
+ else{m.className="msg ok";m.textContent="Pedido listo para enviar. El envío se calcula aparte."}
+ $("sheet").classList.add("open")}
+function wa(){var c=calc(),t="Hola! Quiero hacer este pedido mayorista:\n\n";
+ c.L.forEach(function(x){t+="• "+x.q+" × "+x.p.n+" ("+fm(x.u)+" c/u) = "+fm(x.u*x.q)+"\n"});
+ t+="\nTotal: "+fm(c.tot)+"\n¿Tenés stock? ¿Cuánto sale el envío?\n\nMi nombre: \nMi ciudad: ";
+ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(t),"_blank")}
+document.addEventListener("input",function(e){if(e.target.id!="sq")return;var v=e.target.value.toLowerCase();document.querySelectorAll(".item").forEach(function(a){a.style.display=a.textContent.toLowerCase().indexOf(v)<0?"none":""})});
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+ if(b.dataset.c){cat=b.dataset.c;render();return}
+ if(b.dataset.i){var i=b.dataset.i,d=+b.dataset.d;Q[i]=Math.max(0,(Q[i]||0)+d);upd();return}
+ if(b.id=="open")sheet();if(b.id=="close")$("sheet").classList.remove("open");
+ if(b.id=="clear"){Q={};$("sheet").classList.remove("open");upd()}
+ if(b.id=="send")wa()});
+render();
+</script>
+</body>
+</html>
